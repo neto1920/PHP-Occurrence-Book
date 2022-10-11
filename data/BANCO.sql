@@ -1,0 +1,7 @@
+CREATE TABLE LIDER(
+
+);
+
+CREATE TABLE PATRULHA(
+    
+);

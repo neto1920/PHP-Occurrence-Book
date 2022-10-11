@@ -1,0 +1,22 @@
+body {
+    background-color: rgb(245, 237, 230);
+}
+
+.bar {
+    background-color: #404079;
+    padding: 30px  0;
+    height: 40px;
+} 
+    
+.nav-link {
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+.card-noticias {
+    margin-left: 30px;
+}
+
+img.criar, .consulta{
+    max-width: 50%;
+}
