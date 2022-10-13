@@ -15,7 +15,7 @@
         header('Location: ../home.php');
         $_SESSION['autenticado'] = 'SIM';
     }else {
-        header('Location: ../index.php?login=errologin');
+        header('Location: index.php?login=errologin');
         $_SESSION['autenticado'] = 'NÃO';
     }
 ?>

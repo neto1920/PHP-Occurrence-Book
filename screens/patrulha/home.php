@@ -9,27 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../../styles/index.css">      
-    <title>Home</title>
-    <style>        
-      .bar {
-        background-color: #404079;
-        height: 40px;
-        padding: 30px  0;
-      }      
-      .nav-link {
-        font-weight: bold;
-        margin-right: 20px;
-        
-      }
-      .card {
-        margin-top: 10rem;
-        margin-left: auto;
-        margin-right: auto;
-      }
-       img.criar, .consulta{
-        max-width: 50%;
-      }
-    </style>
+    <title>Home - Patrulha</title>
   </head>
   <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-success">
@@ -44,7 +24,7 @@
                             <a class="nav-link text-light active" aria-current="page" href="../../home.php">Home</a>
                         </li> 
                         <li class="nav-item sair">
-                            <a href="logoff.php" class="nav-link text-warning">Sair da Conta</a>
+                            <a href="../../func/logoff.php" class="nav-link text-warning">Sair da Conta</a>
                         </li>
                     </ul>
                 </div>

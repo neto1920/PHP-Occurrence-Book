@@ -25,7 +25,7 @@
                     <a class="nav-link text-light" href="home.php">Voltar</a>
                   </li>  
                   <li class="nav-item sair">
-                    <a href="logoff.php" class="nav-link text-warning">Sair da Conta</a>
+                    <a href="../../func/logoff.php" class="nav-link text-warning">Sair da Conta</a>
                   </li>
               </ul>
             </div>
