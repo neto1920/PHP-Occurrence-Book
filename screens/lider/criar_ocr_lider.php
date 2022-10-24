@@ -1,4 +1,6 @@
-
+<?php  
+  require_once('../../func/valida_access.php'); 
+?>
 <!DOCTYPE html>
 <html lang="pt">
   <head>

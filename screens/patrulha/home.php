@@ -46,7 +46,7 @@
                     <div class="card home-card border-success mb-3" style="max-width: 18rem;">
                         <div class="card-body text-success">
                             <h5 class="card-title">Consulta ocorrência</h5>
-                            <a class="card-img" href="exibir_ocorrencias.php" target="_blak">
+                            <a class="card-img" href="exibir_ocorrencias.php">
                             <img src="../../img/consulta.png" class="consulta"></a>
                         </div>
                     </div>
