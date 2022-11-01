@@ -1,21 +1,20 @@
 <?php 
+    require_once("../conexao.php");
+
     session_start();
     $usuario_autenticado = false;
 
-    $usuario_teste = [
-        ['email' => 'teste@teste.com', 'senha' => '123456']
-    ];
+    $stmt = $conn->prepare("SELECT ID, NOME, TIPO FROM usuario WHERE EMAIL= :email AND SENHA= :senha");
+    $stmt->execute(['email' => $_POST['email'], 'senha' => $_POST['senha']]);
+    $resultado = $stmt->fetch();
 
-    foreach ($usuario_teste as $user){
-        if($user['email'] == $_POST['email'] && $user['senha'] == $_POST['senha']){
-            $usuario_autenticado = true;
-        }
-    }
-    if($usuario_autenticado){
-        header('Location: ../home.php');
+    if(isset($resultado['ID']) && $resultado['ID']){
         $_SESSION['autenticado'] = 'SIM';
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['tipo'] = $resultado['TIPO'];
+        $_SESSION['idUser'] = $resultado['ID'];
+        header('Location: ../home.php');       
     }else {
-        header('Location: index.php?login=errologin');
-        $_SESSION['autenticado'] = 'NÃO';
+        header('Location: ../index.php?login=errologin');
     }
 ?>

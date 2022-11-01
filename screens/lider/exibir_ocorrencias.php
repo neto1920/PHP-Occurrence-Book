@@ -1,16 +1,19 @@
 <?php 
-  $_SERVER['REQUEST_TIME'];  
-
+  
+  require_once('../../conexao.php');
   require_once('../../func/valida_access.php'); 
+  $stmt = $conn->prepare(
+    "SELECT 
+      O.ID, O.INFO_POSTO, P.NOME AS PATRULHEIRO, O.OS_ABERTA, 
+      O.PREVENTIVAS_ENVIADAS, O.OBS_PLANTONISTA, O.`DATA`, U.NOME AS USUARIO
+    FROM ocorrencia O
+    LEFT JOIN patrulheiro P ON P.ID=O.ID_PATRULHEIRO
+    LEFT JOIN usuario U ON U.ID=O.IDUSER
+    WHERE O.TIPO = 1"
+  );
+  $stmt->execute();
+  $ocorrencias = $stmt->fetchAll();
 
-  $materias = [];
-  $arquivo = fopen('arquivo.hd', 'r');
-
-  while(!feof($arquivo)) {
-    $registro = fgets($arquivo);
-    $materias[] = $registro;
-  }
-  fclose($arquivo);
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -56,32 +59,26 @@
       <h2 style="margin-top: 30px;">Últimas Ocorrências</h2>
       <hr>
 
-      <?php foreach ($materias as $materia){ ?>              
-        <?php
-          $materia_dados = explode("#", $materia);
-          if(count($materia_dados) < 3 ) {
-            continue;
-          }  
-        ?>
+      <?php foreach ($ocorrencias as $ocorrencia){ ?> 
         <div class="row card-noticias">         
           <div class="card border-success" style="max-width: 60rem;">
               <div class="card-body text-black">  
                 <h5>INFORMAÇÕES DO POSTO</h5>
-                x1<p class="card-text"><?= $materia_dados[0] ?></p>
+                <p class="card-text"><?= $ocorrencia['INFO_POSTO'] ?></p>
                 <hr>
                 <h5>PATRULHEIRO DO PLANTÃO</h5>
-                <p class="card-text"><?= $materia_dados[1] ?></p>
+                <p class="card-text"><?= $ocorrencia['PATRULHEIRO'] ?></p>
                 <hr>
                 <h5>ORDEM DE SERVIÇO ABERTA</h5>
-                <p class="card-text"><?= $materia_dados[2] ?></p>
+                <p class="card-text"><?= $ocorrencia['OS_ABERTA'] ?></p>
                 <hr>
                 <h5>PREVENTIVAS ENVIADAS</h5>
-                <p class="card-text"><?= $materia_dados[3] ?></p>
+                <p class="card-text"><?= $ocorrencia['PREVENTIVAS_ENVIADAS'] ?></p>
                 <hr>
                 <h5>OBSERVAÇÕES DO PLANTÃO</h5>
-                <p class="card-text"><?= $materia_dados[4] ?></p>
+                <p class="card-text"><?= $ocorrencia['OBS_PLANTONISTA'] ?></p>
               </div>            
-              <div class="card-footer bg-transparent border-success"><?= date('d/m/Y H:i') ?></div>
+              <div class="card-footer bg-transparent border-success"> Criado Por <b> <?= $ocorrencia['USUARIO'] ?> | <?=date('d/m/Y - H:i', strtotime($ocorrencia['DATA']));?> </b></div>
           </div>
         </div>
       <br>
