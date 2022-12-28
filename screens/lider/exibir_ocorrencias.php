@@ -48,12 +48,6 @@
         </div>
     </nav>
 
-    <section>
-      <div>
-        
-      </div>
-    </section>
-
     <section class="container-fluid">  
         
       <h2 style="margin-top: 30px;">Últimas Ocorrências</h2>

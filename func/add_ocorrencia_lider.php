@@ -16,6 +16,8 @@ if(empty($informacoes_posto) || empty($patrulheiro) || empty($os_aberta) || empt
     die();
 };
 
+
+
 $stmt = $conn->prepare("INSERT INTO ocorrencia 
                         (INFO_POSTO,ID_PATRULHEIRO,OS_ABERTA,PREVENTIVAS_ENVIADAS,OBS_PLANTONISTA,TIPO, IDUSER)
                         VALUES (:INFO_POSTO,:ID_PATRULHEIRO,:OS_ABERTA,:PREVENTIVAS_ENVIADAS,:OBS_PLANTONISTA,:TIPO,:IDUSER)");

@@ -1,16 +1,19 @@
 <?php 
-  $_SERVER['REQUEST_TIME'];  
-  
+
+  require_once('../../conexao.php');
   require_once('../../func/valida_access.php'); 
+  $stmt = $conn->prepare(
+    "SELECT 
+      O.ID, O.INFO_POSTO, P.NOME AS PATRULHEIRO, O.OS_ABERTA, 
+      O.PREVENTIVAS_ENVIADAS, O.OBS_PLANTONISTA, O.`DATA`, U.NOME AS USUARIO
+    FROM ocorrencia O
+    LEFT JOIN patrulheiro P ON P.ID=O.ID_PATRULHEIRO
+    LEFT JOIN usuario U ON U.ID=O.IDUSER
+    WHERE O.TIPO = 0"
+  );
+  $stmt->execute();
+  $ocorrencias = $stmt->fetchAll();
 
-  $materias = [];
-  $arquivo = fopen('arquivo.hd', 'r');
-
-  while(!feof($arquivo)) {
-    $registro = fgets($arquivo);
-    $materias[] = $registro;
-  }
-  fclose($arquivo);
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -49,44 +52,36 @@
       <div>
         
       </div>
-    </section>
-
-    <section class="container-fluid">  
+      <section class="container-fluid">  
         
-      <h2 style="margin-top: 30px;">Últimas Ocorrências</h2>
-      <hr>
-
-      <?php foreach ($materias as $materia){ ?>              
-        <?php
-          $materia_dados = explode("#", $materia);
-          if(count($materia_dados) < 5 ) {
-            continue;
-          }  
-        ?>
-      <div class="row card-noticias">         
-        <div class="card border-success" style="max-width: 60rem;">
-            <div class="card-body text-black">  
-              <h5>INFORMAÇÕES DO POSTO</h5>
-              <p class="card-text"><?= $materia_dados[0] ?></p>
-              <hr>
-              <h5>PATRULHEIRO DO PLANTÃO</h5>
-              <p class="card-text"><?= $materia_dados[1] ?></p>
-              <hr>
-              <h5>ORDEM DE SERVIÇO ABERTA</h5>
-              <p class="card-text"><?= $materia_dados[2] ?></p>
-              <hr>
-              <h5>PREVENTIVAS ENVIADAS</h5>
-              <p class="card-text"><?= $materia_dados[3] ?></p>
-              <hr>
-              <h5>OBSERVAÇÕES DO PLANTÃO</h5>
-              <p class="card-text"><?= $materia_dados[4] ?></p>
-            </div>            
-            <div class="card-footer bg-transparent border-success"><?= date('d/m/Y H:i') ?></div>
-        </div>
-      </div>
-      <br>
-      <?php } ?>
-    </section>
+        <h2 style="margin-top: 30px;">Últimas Ocorrências</h2>
+        <hr>
+  
+        <?php foreach ($ocorrencias as $ocorrencia){ ?> 
+          <div class="row card-noticias">         
+            <div class="card border-success" style="max-width: 60rem;">
+                <div class="card-body text-black">  
+                  <h5>INFORMAÇÕES DO POSTO</h5>
+                  <p class="card-text"><?= $ocorrencia['INFO_POSTO'] ?></p>
+                  <hr>
+                  <h5>PATRULHEIRO DO PLANTÃO</h5>
+                  <p class="card-text"><?= $ocorrencia['PATRULHEIRO'] ?></p>
+                  <hr>
+                  <h5>ORDEM DE SERVIÇO ABERTA</h5>
+                  <p class="card-text"><?= $ocorrencia['OS_ABERTA'] ?></p>
+                  <hr>
+                  <h5>PREVENTIVAS ENVIADAS</h5>
+                  <p class="card-text"><?= $ocorrencia['PREVENTIVAS_ENVIADAS'] ?></p>
+                  <hr>
+                  <h5>OBSERVAÇÕES DO PLANTÃO</h5>
+                  <p class="card-text"><?= $ocorrencia['OBS_PLANTONISTA'] ?></p>
+                </div>            
+                <div class="card-footer bg-transparent border-success"> Criado Por <b> <?= $ocorrencia['USUARIO'] ?> | <?=date('d/m/Y - H:i', strtotime($ocorrencia['DATA']));?> </b></div>
+            </div>
+          </div>
+        <br>
+        <?php } ?>
+      </section>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

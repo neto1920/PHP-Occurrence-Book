@@ -51,7 +51,7 @@
                 <div class="col">
                     <div class="card home-card border-success mb-3" style="max-width: 18rem;">
                         <div class="card-body text-success">
-                            <h5 class="card-title">Lider</h5>
+                            <h5 class="card-title">Portaria</h5>
                             <a class="card-img" href="screens/lider/home.php">
                             <img src="img/lider.png" class="lider"></a>
                         </div>
@@ -60,7 +60,7 @@
                 <div class="col">                
                 <div class="card home-card border-success mb-3" style="max-width: 18rem;">
                         <div class="card-body text-success">
-                            <h5 class="card-title">Patrulha</h5>
+                            <h5 class="card-title">Monitoramento</h5>
                             <a class="card-img" href="screens/patrulha/home.php">
                             <img src="img/patrulha.png"></a>
                         </div>
