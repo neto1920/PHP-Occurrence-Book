@@ -35,11 +35,12 @@ CREATE TABLE IF NOT EXISTS `ocorrencia` (
   KEY `FK_ocorrencia_usuario` (`IDUSER`),
   CONSTRAINT `FK_ocorrencia_patrulheiro` FOREIGN KEY (`ID_PATRULHEIRO`) REFERENCES `patrulheiro` (`ID`),
   CONSTRAINT `FK_ocorrencia_usuario` FOREIGN KEY (`IDUSER`) REFERENCES `usuario` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela livro_de_ocorrencia.ocorrencia: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela livro_de_ocorrencia.ocorrencia: ~2 rows (aproximadamente)
 INSERT INTO `ocorrencia` (`ID`, `INFO_POSTO`, `ID_PATRULHEIRO`, `OS_ABERTA`, `PREVENTIVAS_ENVIADAS`, `OBS_PLANTONISTA`, `TIPO`, `IDUSER`, `DATA`) VALUES
-	(9, 'teste', 2, '2022127', 'troca de ata', 'apenas mas 1 teste', 1, 3, '2022-12-27 16:45:25');
+	(11, 'teste', 3, 'teste', 'sem rondas ', 'teste', 1, 4, '2022-12-30 09:07:42'),
+	(12, 'teste', 3, 'teste', 'teste', 'teste', 1, 4, '2022-12-30 09:08:42');
 
 -- Copiando estrutura para tabela livro_de_ocorrencia.patrulheiro
 CREATE TABLE IF NOT EXISTS `patrulheiro` (
@@ -61,19 +62,19 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `NOME` varchar(150) NOT NULL,
   `EMAIL` varchar(150) NOT NULL,
   `SENHA` varchar(150) NOT NULL,
-  `TIPO` tinyint(4) NOT NULL COMMENT '0 - monitoramento | 1 - Lider',
+  `TIPO` tinyint(4) NOT NULL COMMENT '1 - Lider | 2 - monitoramento',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COMMENT='lider = portaria\r\npatrulha = monitoramento';
 
--- Copiando dados para a tabela livro_de_ocorrencia.usuario: ~6 rows (aproximadamente)
+-- Copiando dados para a tabela livro_de_ocorrencia.usuario: ~7 rows (aproximadamente)
 INSERT INTO `usuario` (`ID`, `NOME`, `EMAIL`, `SENHA`, `TIPO`) VALUES
 	(1, 'teste', 'teste@teste.com', '123456', 0),
-	(2, 'Maili', '@maili', 'maili@2022', 0),
+	(2, 'Maili', '@maili', 'maili@2022', 2),
 	(3, 'rafael', '@rafael', 'rafael@2022', 1),
-	(4, 'Shirlei', '@shirlei', 'shirlei@2022', 0),
-	(5, 'Joelma', '@joelma', 'joelma@2022', 0),
-	(7, 'Belmira', '@belmira', 'belmira@2022', 0),
-	(8, 'Fabiane ', '@fabiane ', 'fabiane@2022', 0);
+	(4, 'Shirlei', '@shirlei', 'shirlei@2022', 2),
+	(5, 'Joelma', '@joelma', 'joelma@2022', 2),
+	(7, 'Belmira', '@belmira', 'belmira@2022', 2),
+	(8, 'Fabiane ', '@fabiane ', 'fabiane@2022', 2);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -1,28 +1,38 @@
 <?php
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
-    
-    $informacoes_posto = str_replace('#', "-", $_POST['informacoes_posto']);
-    $patrulheiro = str_replace('#', "-", $_POST['patrulheiro']);
-    $os_aberta = str_replace('#', "-", $_POST['os_aberta']);
-    $preventiva_env = str_replace('#', "-", $_POST['preventiva_env']);
-    $obs_plantao = str_replace('#', "-", $_POST['obs_plantao']);
+session_start();
+require_once('../conexao.php');
 
-   
-    if(empty(($informacoes_posto) && ($patrulheiro) && ($os_aberta) && ($preventiva_env) && ($obs_plantao))) {
-        echo '
-            <div class="text-danger">
-                Nescessário preencher os campos
-            </div>
-        ';
-    };
+$informacoes_posto = $_POST['informacoes_posto'];
+$patrulheiro =  $_POST['patrulheiro'];
+$os_aberta = $_POST['os_aberta'];
+$preventiva_env = $_POST['preventiva_env'];
+$obs_plantao = $_POST['obs_plantao'];
 
-    $texto = $informacoes_posto . "#" . $patrulheiro . "#" . $os_aberta . "#" . $preventiva_env . "#" . $obs_plantao . PHP_EOL;
+if(empty($informacoes_posto) || empty($patrulheiro) || empty($os_aberta) || empty($preventiva_env) || empty($obs_plantao)) {
+    echo '
+        <div class="text-danger">
+            Nescessário preencher os campos
+        </div>';
+    die();
+};
 
-    $patrulha = fopen("../screens/patrulha/arquivo.hd", "a");
-    fwrite($patrulha, $texto);
-    fclose($patrulha);
 
-    header('Location: ../screens/patrulha/exibir_ocorrencias.php');
+
+$stmt = $conn->prepare("INSERT INTO ocorrencia 
+                        (INFO_POSTO,ID_PATRULHEIRO,OS_ABERTA,PREVENTIVAS_ENVIADAS,OBS_PLANTONISTA,TIPO, IDUSER)
+                        VALUES (:INFO_POSTO,:ID_PATRULHEIRO,:OS_ABERTA,:PREVENTIVAS_ENVIADAS,:OBS_PLANTONISTA,:TIPO,:IDUSER)");
+$stmt->execute(
+    [
+        'INFO_POSTO' => $informacoes_posto, 
+        'ID_PATRULHEIRO' => $patrulheiro,
+        'OS_ABERTA' => $os_aberta,
+        'PREVENTIVAS_ENVIADAS' => $preventiva_env,
+        'OBS_PLANTONISTA' => $obs_plantao,
+        'TIPO' => 2,
+        'IDUSER' => $_SESSION['idUser']
+    ]
+);
+
+header('Location: ../screens/patrulha/exibir_ocorrencias.php');
+
 ?>

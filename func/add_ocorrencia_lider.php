@@ -32,5 +32,7 @@ $stmt->execute(
         'IDUSER' => $_SESSION['idUser']
     ]
 );
+
 header('Location: ../screens/lider/exibir_ocorrencias.php');
+
 ?>

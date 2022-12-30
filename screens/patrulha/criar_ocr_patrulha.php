@@ -49,7 +49,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <form method="post" action="../../func/add_ocorrencia_lider.php">
+                  <form method="post" action="../../func/add_ocorrencia_patrulha.php">
                     <div class="form-group">
                       <label>INFORMAÇÕES DO POSTO</label>
                       <textarea name="informacoes_posto" class="form-control" rows="3" required ></textarea>
