@@ -1,5 +1,10 @@
 <?php
+  require_once('../../conexao.php');
   require_once('../../func/valida_access.php'); 
+  
+  $stmt = $conn->prepare("SELECT ID, NOME FROM patrulheiro ORDER BY NOME");
+  $stmt->execute();
+  $patrulheiros = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -33,7 +38,7 @@
             </div>
         </div>
     </nav>
-    
+
     <div class="container-fluid">  
       <div class="row">
         <div class="justify-content-center">
@@ -44,7 +49,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <form method="post" action="../../func/add_ocorrencia_patrulha.php">
+                  <form method="post" action="../../func/add_ocorrencia_lider.php">
                     <div class="form-group">
                       <label>INFORMAÇÕES DO POSTO</label>
                       <textarea name="informacoes_posto" class="form-control" rows="3" required ></textarea>
@@ -53,11 +58,12 @@
                     <div class="form-group">
                       <label>PATRULHEIRO DO PLANTÃO</label>
                       <select name="patrulheiro" class="form-control" required>
-                        <option> Selecione o patrulheiro</option>
-                        <option>THIAGO</option>
-                        <option>GLEISON</option>
-                        <option>BONFIM</option>
-                        <option>RAMON</option>
+                        <option value="">Selecione o patrulheiro</option>
+                      <?php
+                      foreach ($patrulheiros as $patrulheiro) {
+                        echo '<option value="'.$patrulheiro['ID'].'">'.$patrulheiro['NOME'].'</option>';
+                      }
+                      ?>
                       </select>
                     </div>
                     <br>
@@ -81,7 +87,9 @@
                         <a class="btn btn-lg btn-warning btn-block" type="button" href="home.php">Cancelar</a>
                       </div>
 
-                      <div class="col-6 d-grid justify-content-end">                        
+                      <div class="col-6 d-grid justify-content-end">         
+                        <input type="hidden" name="IDUSER" value="<?=$_SESSION['idUser'];?>">    
+                        <input type="hidden" name="TIPO" value="1" />           
                         <button class="btn btn-lg btn-info btn-block " type="submit">Publicar Ocorrência</button>
                       </div>
                     </div>

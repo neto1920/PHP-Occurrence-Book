@@ -7,9 +7,11 @@
       O.ID, O.INFO_POSTO, P.NOME AS PATRULHEIRO, O.OS_ABERTA, 
       O.PREVENTIVAS_ENVIADAS, O.OBS_PLANTONISTA, O.`DATA`, U.NOME AS USUARIO
     FROM ocorrencia O
+    
     LEFT JOIN patrulheiro P ON P.ID=O.ID_PATRULHEIRO
     LEFT JOIN usuario U ON U.ID=O.IDUSER
-    WHERE O.TIPO = 0"
+    WHERE O.TIPO = 2
+   ORDER BY data DESC"    
   );
   $stmt->execute();
   $ocorrencias = $stmt->fetchAll();
