@@ -3,7 +3,7 @@
         <meta charset="utf-8" />
         <title>Login</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="styles/index.css">        
+        <link rel="stylesheet" href="assets/styles/style.css">        
     </head>
   <body>
     <div class="container">    
@@ -16,7 +16,7 @@
             <div class="card-body">
               <form action="func/valida_login.php" method="post">
                 <div class="form-group">
-                  <input name="email" type="text" class="form-control" placeholder="E-mail">
+                  <input name="email" type="text" class="form-control" placeholder="Login">
                 </div>
                 <div class="form-group">
                   <input name="senha" type="password" class="form-control" placeholder="Senha">

@@ -44,3 +44,12 @@ img.lider{
 .formulario {
     margin-right: 90px;
 }
+
+/* Editor trumbowyg */
+.trumbowyg-box, .trumbowyg-editor {
+    min-height: 100px !important;
+}
+
+.trumbowyg-editor, .trumbowyg-textarea {
+    min-height: 100px !important;
+}
